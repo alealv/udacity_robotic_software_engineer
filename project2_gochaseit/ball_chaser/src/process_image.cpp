@@ -52,12 +52,12 @@ private:
     }
 
     // Move if any of the counters are greater than 0
-    float lin_x = left || mid || right ? 1 : 0;
+    float lin_x = left || mid || right ? 0.5 : 0;
 
     // Set the angle proportional to the difference between right and left
     float ang_z = 0;
     if (lin_x)
-      ang_z = M_PI_4 * (right - left) / (float)(left + mid + right);
+      ang_z = M_PI_4 * (left - right) / (float)(left + mid + right);
 
     // Move robot
     drive_robot(lin_x, ang_z);
