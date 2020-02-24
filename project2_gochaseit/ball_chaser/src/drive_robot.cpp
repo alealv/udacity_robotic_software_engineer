@@ -30,7 +30,7 @@ private:
     // Create a motor_command object of type geometry_msgs::Twist
     geometry_msgs::Twist motor_command;
 
-    // Set wheel velocities, forward [0.5, 0.0]
+    // Set wheel velocities
     motor_command.linear.x = req.linear_x;
     motor_command.angular.z = req.angular_z;
 
@@ -38,8 +38,9 @@ private:
     cmd_vel_publisher.publish(motor_command);
 
     // Return a response message
-    res.msg_feedback = "Linear x: " + std::to_string(motor_command.linear.x) + "\nAngular z: " + std::to_string(motor_command.angular.z);
-    ROS_INFO_STREAM(res.msg_feedback);
+    // res.msg_feedback = "Linear x: " + std::to_string(motor_command.linear.x) + "\nAngular z: " + std::to_string(motor_command.angular.z);
+    // ROS_INFO_STREAM(res.msg_feedback);
+    ROS_INFO_STREAM(motor_command);
   }
 };
 
