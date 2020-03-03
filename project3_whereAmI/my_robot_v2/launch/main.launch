@@ -1,0 +1,17 @@
+<launch>
+    
+  <!-- World -->
+  <include file="$(find my_robot_v2)/launch/world.launch">
+  	<arg name="gui" value="false" />
+  </include>	
+
+  <!-- ACML -->
+  <include file="$(find my_robot_v2)/launch/acml.launch"/>
+
+  <!-- RVIZ -->
+  <node args="-d $(find my_robot_v2)/rviz/my_robot_v2_config.rviz" name="rviz" pkg="rviz" respawn="false" type="rviz"/>
+
+  <!-- Turtlebot Teleop-->
+  <!-- <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen"/> -->
+
+</launch>
