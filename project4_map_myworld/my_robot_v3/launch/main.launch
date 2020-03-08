@@ -1,0 +1,29 @@
+<launch>
+    
+  <!-- World -->
+  <include file="$(find my_robot_v3)/launch/world.launch">
+  	<arg name="gui" value="false" />
+  </include>	
+
+  <!-- ACML -->
+  <include file="$(find my_robot_v3)/launch/mapping.launch"/>
+
+  <!-- RVIZ -->
+  <node args="-d $(find my_robot_v3)/rviz/my_robot_v3_config.rviz" name="rviz" pkg="rviz" respawn="false" type="rviz"/>
+
+  <!-- Turtlebot Teleop-->
+  <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen"/>
+
+  <!-- visualization with rtabmapviz -->
+    <node pkg="rtabmap_ros" type="rtabmapviz" name="rtabmapviz" args="-d $(find rtabmap_ros)/launch/config/rgbd_gui.ini" output="screen">
+      <param name="subscribe_depth"             type="bool" value="true"/>
+      <param name="subscribe_scan"              type="bool" value="true"/>
+      <param name="frame_id"                    type="string" value="robot_footprint"/>
+
+      <remap from="rgb/image"       to="$(arg rgb_topic)"/>
+      <remap from="depth/image"     to="$(arg depth_topic)"/>
+      <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
+      <remap from="scan"            to="/scan"/>
+  </node>
+  
+</launch>
